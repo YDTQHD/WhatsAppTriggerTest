@@ -17,7 +17,6 @@ import com.github.privacystreams.core.UQI;
 import com.github.privacystreams.core.purposes.Purpose;
 import com.github.privacystreams.utils.AppUtils;
 
-import java.util.ConcurrentModificationException;
 import java.util.List;
 
 
@@ -84,9 +83,6 @@ public class AutoSelectService extends Service {
                 } else {
                     Log.e("Warning", "Already Clicked");
                 }
-                try { uqi.stopAll(); }
-                catch ( ConcurrentModificationException e)
-                { e.printStackTrace(); }
                 stopSelf();
             }
         });

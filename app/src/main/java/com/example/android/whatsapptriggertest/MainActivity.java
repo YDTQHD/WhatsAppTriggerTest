@@ -2,7 +2,6 @@ package com.example.android.whatsapptriggertest;
 
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -10,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.Button;
+
+import static android.app.PendingIntent.getService;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.button_notice:
-                PendingIntent pendingIntent = PendingIntent.getService(this, 0, launchService, 0);
                 NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                 Notification notification = new NotificationCompat.Builder(this)
                         .setContentTitle("You just arrived home!")
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
                         .setPriority(Notification.PRIORITY_MAX) //为什么不work????
-                        .setContentIntent(pendingIntent)
+                        .setContentIntent(getService(this, 0, launchService, 0))
                         .setAutoCancel(true)
                         .build();
                 manager.notify(1, notification);
